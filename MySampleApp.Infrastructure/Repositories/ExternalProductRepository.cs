@@ -1,4 +1,5 @@
 ﻿using MySampleApp.Domain.Interfaces;
+using MySampleApp.Domain.Models;
 using MySampleApp.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace MySampleApp.Infrastructure.Repositories
      FakeStoreHttpClientService fakeStoreHttpClientService)
         : IExternalProductRepository
     {
-        public async Task<dynamic> GetData()
+        public async Task<List<ExternalProductData>> GetData()
         {
             return await fakeStoreHttpClientService.GetData();
         }

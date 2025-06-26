@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySampleApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,9 +11,11 @@ namespace MySampleApp.Infrastructure.Services
 {
     public class FakeStoreHttpClientService(HttpClient httpClient)
     {
-        public async Task<dynamic> GetData()
+        public async Task<List<ExternalProductData>> GetData()
         {
-            return await httpClient.GetFromJsonAsync<dynamic>("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,EUR,INR");
+            var url = "products";
+            return await httpClient.GetFromJsonAsync<List<ExternalProductData>>(url)
+                   ?? new List<ExternalProductData>();
         }
     }
 }

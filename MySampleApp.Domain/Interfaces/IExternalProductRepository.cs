@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySampleApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace MySampleApp.Domain.Interfaces
 {
     public interface IExternalProductRepository
     {
-        Task<dynamic> GetData();
+        Task<List<ExternalProductData>> GetData();
     }
 }

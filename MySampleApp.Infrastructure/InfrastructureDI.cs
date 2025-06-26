@@ -26,7 +26,10 @@ namespace MySampleApp.Infrastructure
             });
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IExternalProductRepository, ExternalProductRepository>();
-            services.AddHttpClient<FakeStoreHttpClientService>();
+            services.AddHttpClient<FakeStoreHttpClientService>(Options=>
+            {
+                Options.BaseAddress = new Uri("https://fakestoreapi.com/");
+            });
             return services;
         }
     }
