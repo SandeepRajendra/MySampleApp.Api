@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MySampleApp.Application.Events;
 using MySampleApp.Domain.Entities;
 using MySampleApp.Domain.Interfaces;
 using System;
@@ -15,7 +16,9 @@ namespace MySampleApp.Application.Commands
     {
         public async Task<ProductEntity> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
-            return await productRepository.AddProduct(request.ProductEntity);
+            var addedProduct = await productRepository.AddProduct(request.ProductEntity);
+            await mediator.Publish(new ProductAddedNotification(addedProduct), cancellationToken);
+            return addedProduct;
         }
     }
 }
