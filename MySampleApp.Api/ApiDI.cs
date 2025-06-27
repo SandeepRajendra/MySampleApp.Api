@@ -9,7 +9,7 @@ namespace MySampleApp.Api
         public static IServiceCollection AddApiDI(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddApplicationDI()
-                .AddInfrastructureDI()
+                .AddInfrastructureDI(configuration)
                 .AddDomainDI(configuration);
             return services;
         }
