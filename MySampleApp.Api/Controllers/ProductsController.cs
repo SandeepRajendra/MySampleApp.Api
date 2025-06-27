@@ -53,11 +53,11 @@ namespace MySampleApp.Api.Controllers
         public async Task<IActionResult> DeleteProduct([FromRoute] int Id)
         {
             var result = await sender.Send(new DeleteProductCommand(Id));
-            if (result == null)
+            if (!result)
             {
                 return NotFound(new { Message = $"No product found with ID = {Id}" });
             }
-            return Ok(result);
+            return Ok(new { Message = $"Product with ID = {Id} deleted successfully." });
         }
     }
 }

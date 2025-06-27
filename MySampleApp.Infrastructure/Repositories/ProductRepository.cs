@@ -19,7 +19,10 @@ namespace MySampleApp.Infrastructure.Repositories
 
         public async Task<ProductEntity> GetProductById(int Id)
         {
-            return await mySampleAppDbContext.Products.FirstOrDefaultAsync(x => x.Id == Id);
+            var product = await mySampleAppDbContext.Products.FirstOrDefaultAsync(x => x.Id == Id);
+            if (product == null)
+                throw new KeyNotFoundException($"Product with ID {Id} not found.");
+            return product;
         }
 
         public async Task<ProductEntity> AddProduct(ProductEntity productEntity)
